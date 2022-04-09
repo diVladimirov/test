@@ -15,6 +15,8 @@ import {
   TableSortLabel,
 } from "@mui/material";
 
+import DataRow from "./DataRow";
+
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -48,8 +50,11 @@ const Data = () => {
   const [orderBy, setOrderBy] = useState("id");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+
   const dispatch = useDispatch();
-  const studentsData = useSelector((state) => state.students.students.data);
+  const studentsData = useSelector(
+    (state) => state.students.students.data ?? []
+  );
 
   useEffect(() => {
     dispatch(fetchStudents());
@@ -128,23 +133,14 @@ const Data = () => {
                 </TableCell>
 
                 <TableCell>Parents</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {stableSort(studentsData, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((student) => (
-                  <TableRow hover key={student.id}>
-                    <TableCell padding="checkbox">
-                      <Checkbox color="primary" />
-                    </TableCell>
-                    <TableCell>{student.name}</TableCell>
-                    <TableCell>{student.id}</TableCell>
-                    <TableCell>{student.class}</TableCell>
-                    <TableCell>{student.score}</TableCell>
-                    <TableCell>{student.speed}</TableCell>
-                    <TableCell>{student.parents.join(", ")}</TableCell>
-                  </TableRow>
+                  <DataRow key={student.id} student={student} />
                 ))}
             </TableBody>
           </Table>
@@ -152,7 +148,7 @@ const Data = () => {
         <TablePagination
           rowsPerPageOptions={[5, 10, 20]}
           component="div"
-          count={studentsData?.length}
+          count={studentsData?.length ?? 0}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
