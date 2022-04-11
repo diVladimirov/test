@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import React from "react";
 import SearchMaster from "./SearchMaster";
 import FileUploadTwoToneIcon from "@mui/icons-material/FileUploadTwoTone";
@@ -17,7 +17,17 @@ const Headline = () => {
         alignItems: "center",
       }}
     >
-      <h1>Students</h1>
+      <Typography
+        variant="h1"
+        sx={{
+          fontWeight: 700,
+          fontSize: 20,
+          lineHeight: 1.2,
+          textTransform: "uppercase",
+        }}
+      >
+        students
+      </Typography>
       <SearchMaster />
       <Button
         variant="text"

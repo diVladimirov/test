@@ -39,7 +39,15 @@ const DataRow = ({ student }) => {
         <TableCell colSpan={8} sx={{ paddingTop: 0, paddingBottom: 0 }}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box>
-              <Typography>Collapse</Typography>
+              <Box
+                component="div"
+                sx={{ display: "flex", textTransform: "upperCase" }}
+              >
+                <Typography sx={{ marginRight: "15px" }}>
+                  student: {student.name}
+                </Typography>
+                <Typography>id: {student.id}</Typography>
+              </Box>
               <Table>
                 <TableHead>
                   <TableRow>

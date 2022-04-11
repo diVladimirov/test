@@ -50,8 +50,5 @@ const GlobalStyle = css`
     display: flex;
     flex-direction: column;
   }
-  main {
-    flex: 1 1 auto;
-  }
 `;
 export default GlobalStyle;
