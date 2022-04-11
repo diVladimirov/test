@@ -3,8 +3,15 @@ import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
+import { useDispatch } from "react-redux";
+import { updateFilter } from "../redux/students/studentsReducers";
 
 const SearchMaster = () => {
+  const dispatch = useDispatch();
+
+  const handleChange = (event) => {
+    dispatch(updateFilter(event.currentTarget.value));
+  };
   return (
     <Paper
       component="form"
@@ -21,6 +28,7 @@ const SearchMaster = () => {
       <InputBase
         sx={{ flex: 1 }}
         placeholder="Enter Student Name, Parent or ID here"
+        onChange={handleChange}
       />
       <IconButton type="submit" aria-label="search">
         <SearchIcon />

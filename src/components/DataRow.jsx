@@ -1,4 +1,4 @@
-import { useState, useId } from "react";
+import { useState } from "react";
 import {
   TableRow,
   TableCell,
@@ -16,7 +16,6 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 const DataRow = ({ student }) => {
   const [open, setOpen] = useState(false);
-  const keyId = useId();
 
   return (
     <>
@@ -56,12 +55,16 @@ const DataRow = ({ student }) => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {student.tests.map((test) => (
-                    <TableRow key={keyId}>
-                      <TableCell>{test.index}</TableCell>
+                  {student.tests.map((test, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{(index += 1)}</TableCell>
                       <TableCell>{test.label}</TableCell>
-                      <TableCell>{test.score}</TableCell>
-                      <TableCell>{test.speed}</TableCell>
+                      <TableCell>
+                        {test.score === null ? "NIL" : test.score}
+                      </TableCell>
+                      <TableCell>
+                        {test.speed === null ? "NIL" : test.speed}
+                      </TableCell>
                       <TableCell>{test.total}</TableCell>
                       <TableCell>{test.expSpeed}</TableCell>
                       <TableCell>{test.concept}</TableCell>

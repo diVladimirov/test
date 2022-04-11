@@ -50,15 +50,25 @@ const Data = () => {
   const [orderBy, setOrderBy] = useState("id");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-
   const dispatch = useDispatch();
-  const studentsData = useSelector(
-    (state) => state.students.students.data ?? []
-  );
 
   useEffect(() => {
     dispatch(fetchStudents());
   }, [dispatch]);
+
+  const studentsData = useSelector(
+    (state) => state.students.students.data ?? []
+  );
+
+  const filter = useSelector((state) => state.students.filter);
+  
+
+  const filterStudentsData = studentsData.filter(
+    (studentData) =>
+      studentData.name.toLowerCase().includes(filter.toLowerCase()) &&
+      studentData.id.includes(filter)
+  );
+  console.log(filterStudentsData);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

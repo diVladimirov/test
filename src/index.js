@@ -11,11 +11,9 @@ const container = document.getElementById("root");
 const root = createRoot(container);
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <Global styles={GlobalStyle} />
-      <CssBaseline />
-      <App />
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <Global styles={GlobalStyle} />
+    <CssBaseline />
+    <App />
+  </Provider>
 );
