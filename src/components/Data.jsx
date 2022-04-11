@@ -62,10 +62,20 @@ const Data = () => {
 
   const filter = useSelector((state) => state.students.filter);
 
-  const filterStudentsData = studentsData.filter((studentData) =>
-    studentData.name.toLowerCase().includes(filter.toLowerCase())
-  );
-  console.log(filterStudentsData);
+  const filterStudentsData = studentsData.filter((studentData) => {
+    if (studentData.name.toLowerCase().includes(filter.toLowerCase())) {
+      return studentData.name;
+    }
+    if (studentData.id.toString().includes(filter)) {
+      return studentData.id;
+    }
+    if (
+      studentData.parents.join(" ").toLowerCase().includes(filter.toLowerCase())
+    ) {
+      return studentData.parents;
+    }
+    return false;
+  });
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -144,7 +154,7 @@ const Data = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {stableSort(studentsData, getComparator(order, orderBy))
+              {stableSort(filterStudentsData, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((student) => (
                   <DataRow key={student.id} student={student} />
