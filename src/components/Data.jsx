@@ -61,12 +61,9 @@ const Data = () => {
   );
 
   const filter = useSelector((state) => state.students.filter);
-  
 
-  const filterStudentsData = studentsData.filter(
-    (studentData) =>
-      studentData.name.toLowerCase().includes(filter.toLowerCase()) &&
-      studentData.id.includes(filter)
+  const filterStudentsData = studentsData.filter((studentData) =>
+    studentData.name.toLowerCase().includes(filter.toLowerCase())
   );
   console.log(filterStudentsData);
 
